@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.0"
+              xmlns="http://java.sun.com/xml/ns/javaee" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+    <application>
+        <locale-config>
+            <default-locale>pl</default-locale>
+            <supported-locale>pl</supported-locale>
+            <supported-locale>en</supported-locale>
+        </locale-config>
+        <resource-bundle>
+            <base-name>i18n.messages</base-name>
+            <var>msg</var>
+        </resource-bundle>
+        <message-bundle>
+            i18n.jsf_messages
+        </message-bundle>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        
+        <!--Rejestracja klasy nasłuchującej i obsługującej zdarzenia np. wyjątki-->
+        <action-listener>
+            pl.jeeaps.crm.exception.web.ExceptionHandlingActionListener
+        </action-listener>
+
+    </application>
+    <!--Reguly nawigacji-->
+    <navigation-rule>
+        <!--Login Error Page-->
+        <navigation-case>
+            <from-outcome>errorPage</from-outcome>
+            <to-view-id>/error/errorPage.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>      
+        <!--Successful logaout page-->
+        <navigation-case>
+            <from-outcome>logOut</from-outcome>
+            <to-view-id>/login/formLogin.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <!--Login Page-->
+        <navigation-case>
+            <from-outcome>logInPage</from-outcome>
+            <to-view-id>/login/formLogin.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>issueList</from-outcome>
+            <to-view-id>/issue/issueList.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>  
+        <navigation-case>
+            <from-outcome>createIssue</from-outcome>
+            <to-view-id>/issue/createIssue.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>       
+        <navigation-case>
+            <from-outcome>accountList</from-outcome>
+            <to-view-id>/account/accountList.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>issueDetail</from-outcome>
+            <to-view-id>/issue/issueDetail.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <!--PROJECT-->
+        <navigation-case>
+            <from-outcome>projectDetail</from-outcome>
+            <to-view-id>/project/projectDetail.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>                
+
+    </navigation-rule>
+
+</faces-config>

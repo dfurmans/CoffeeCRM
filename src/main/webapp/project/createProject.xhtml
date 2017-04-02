@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../templates/basicTemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="top">
+
+    </ui:define>
+
+    <ui:define name="left">
+
+    </ui:define>
+
+    <ui:define name="content">
+
+        <h:form>
+            <p:fieldset legend="Create new Project" toggleable="true">
+                <h:panelGrid columns="2">
+
+
+                    <p:outputLabel value="Name:" for="name" />
+                    <p:inputText id="name" value="#{createProjectBB.project.name}" title="Name" />
+
+                    <p:outputLabel value="Description:" for="description" />
+                    <p:inputTextarea id="description" value="#{createProjectBB.project.description}" />
+
+                    <p:outputLabel value="Assign Manager Accounts:" for="managersToProject" />
+                    <p:autoComplete id ="managersToProject"  
+                                    value="#{accountAutocomplete.selectedAccounts}" completeMethod="#{accountAutocomplete.complete}" 
+                                    var="account"
+                                    itemLabel="#{account.name}"
+                                    itemValue="#{account}"
+                                    converter="#{multiAccountConvener}"
+                                    multiple="true"
+                                    />
+
+
+                </h:panelGrid>
+            </p:fieldset>
+            <p:commandButton value="#{msg['action.create']}" action="#{createProjectBB.createProject()}" />
+        </h:form>
+    </ui:define>
+
+</ui:composition>

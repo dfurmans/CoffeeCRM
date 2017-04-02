@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <p:outputLabel value="Login" for="login"  />
+    <p:inputText id="login" value="#{pageBean.konto.login}" title="Login" required="true" requiredMessage="#{msg['account.require.login']}"/>
+    
+    <p:outputLabel value="Hasło:" for="password" />
+    <p:inputText id="password" value="#{pageBean.konto.password}" title="Password" required="true" requiredMessage="#{msg['account.require.pass']}" type="password" />
+    
+    <p:outputLabel value="Imię:" for="name" />
+    <p:inputText id="name" value="#{pageBean.konto.name}" title="Name" />
+
+    <p:outputLabel value="Nazwisko:" for="surname" />
+    <p:inputText id="surname" value="#{pageBean.konto.surname}" title="Surname" />
+
+    <p:outputLabel value="Email:" for="email"  />
+    <p:inputText id="email" value="#{pageBean.konto.email}" title="Email" validatorMessage="#{msg['account.email.validation']}" >
+        <f:validateRegex pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" /> </p:inputText>
+
+    <p:outputLabel value="Numer telefonu" for="phonenumber" />
+    <p:inputText id="phonenumber" value="#{pageBean.konto.phoneNumber}" title="PhoneNumber" validatorMessage="#{msg['account.phone.validation']}">
+        <f:validateRegex pattern="^[0-9]{9,12}$" /> </p:inputText>
+    
+</ui:composition>

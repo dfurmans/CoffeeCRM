@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../templates/loginTemplate.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="top">
+        top
+    </ui:define>
+
+    <ui:define name="content" >
+        <p:panel header="Logowanie do systemu Coffee CRM" style="width: 450px; text-align: center">
+                <form method="post" action="j_security_check" >
+                    <p>
+                        Login:
+                        <input type="text" name= "j_username" />
+                        Hasło:
+                        <input type="password" name= "j_password" />
+                    </p>
+                    
+                        <input type="submit" value="Zaloguj" />
+                        <input type="reset" value="Wyczyść" />
+                </form>
+            </p:panel>
+    </ui:define>
+
+</ui:composition>

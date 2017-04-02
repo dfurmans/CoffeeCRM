@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="../templates/basicTemplate.xhtml">
+
+            <ui:define name="top">
+            </ui:define>
+
+            <ui:define name="left">
+
+            </ui:define>
+
+            <ui:define name="content">
+
+                <p:carousel id="basicCarousel" value="#{issueListBB.issueAssigneToMe}" var="issue" rendered="#{accountSession.login}" vertical="false" >  
+                    <f:facet name="header">  
+                        #{msg['issue.MyIssue']}
+                    </f:facet>  
+                    <h:panelGrid columns="1"  cellpadding="1" >  
+
+                        <h:outputText value="Model: #{issue.name}" />  
+
+                        <h:outputText value="Year: #{issue.creationDate}" />  
+
+                        <h:outputText value="Color: #{issue.currentConsigner}" />
+                        
+                        <p:commandButton title="#{msg['issue.detail']}" action="#{issueListBB.editIssue()}" styleClass="ui-icon ui-icon-search" style="margin:0 auto;" >  
+                               
+                            <!--metoda setPropertzActonListener wiaze referencje selectedIssue z aktualnym issue << To wykorzystywane-->
+                            <f:setPropertyActionListener target="#{issueListBB.selectedIssue}" value="#{issue}" />
+                            <!--standardowa metoda przekazywania parametru wykorzystywana w artyrbucie actionListener-->
+                            <f:param name="issueID" value="#{issue.id}" />
+                        </p:commandButton>  
+
+                    </h:panelGrid>  
+                    <f:facet name="footer">  
+                        #{msg['issue.CountMyIssue']}: #{issueListBB.issueAssigneToMe.size()}
+                    </f:facet>  
+                </p:carousel>  
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

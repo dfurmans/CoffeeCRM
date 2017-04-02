@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Produciton</param-value>
+    </context-param>
+    <context-param>
+        <param-name>application.description</param-name>
+        <param-value>CoffeCRM Systems</param-value>
+    </context-param>
+    <context-param>
+        <param-name>resourceBundle.path</param-name>
+        <param-value>i18n.messages</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+    <!--konfiguracja deklaratywnego mechanizmu uwierzytelnienia opartego o JDBC Realm-->
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>CrmJDBCRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/login/formLogin.xhtml</form-login-page>
+            <form-error-page>/login/formLoginError.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    <!--Client Role-->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>ClientPages</web-resource-name>
+            <description>TODO</description>
+            <url-pattern>/isse/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>TODO</description>
+            <role-name>CLIENT</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <!--Employe Role-->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>EmployeRole</web-resource-name>
+            <description>TODO</description>
+            <url-pattern/>
+            <url-pattern/>
+        </web-resource-collection>
+    </security-constraint>
+    <!--Manager Role-->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>ManagerPages</web-resource-name>
+            <description>TODO</description>
+            <url-pattern/>
+            <url-pattern/>
+        </web-resource-collection>
+    </security-constraint>
+    <!--Admin Role-->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>AdminPages</web-resource-name>
+            <description>TODO</description>
+            <url-pattern/>
+            <url-pattern/>
+        </web-resource-collection>
+    </security-constraint>
+    <security-role>
+        <description/>
+        <role-name>ADMIN</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>EMPLOYE</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>MANAGER</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>CLIENT</role-name>
+    </security-role>
+</web-app>

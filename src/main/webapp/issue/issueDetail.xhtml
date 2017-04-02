@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../templates/basicTemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="top">
+    </ui:define>
+
+    <ui:define name="left">
+
+    </ui:define>
+
+    <ui:define name="content">
+        <f:view>
+            <h:form>
+                <h1>Szczegoly zadania</h1>
+                <p:panelGrid columns="2" >
+
+                    <p:outputLabel value="Nazwa zadania" for="name" />
+                    <p:inputText id="name" value="#{detailIssueBB.issue.name}" title="Name" />
+                    <p:outputLabel value="Description:" for="description" />
+                    <p:inputText id="description" value="#{detailIssueBB.issue.description}" title="Description" />
+
+                    <p:outputLabel value="Project:" for="project" />
+                    <p:inputText id="project" value="#{detailIssueBB.issue.project.name}" title="Project" />
+                    
+                    <p:outputLabel value="Przypisane do:" for="issuRecipient" />
+                    <p:inputText id="issuRecipient" value="#{detailIssueBB.issue.currentRecipient.name}" title="Przypisane do:" />
+                    
+                    <p:outputLabel value="Nadawca" for="issuConsigner" />
+                    <p:inputText id="issuConsigner" value="#{detailIssueBB.issue.currentConsigner.name}" title="Nadawaca:" />
+                    
+                    <p:outputLabel value="IssueType:" for="issueType"  />
+                    <p:selectOneListbox id="issueType" value="#{detailIssueBB.issue.issueType}">
+                        <f:selectItems value="#{detailIssueBB.allIssueType}" var="issuesType" 
+                                       itemValue="#{issuesType}" itemLabel="#{issuesType}"/>
+                    </p:selectOneListbox>
+
+                    <p:outputLabel value="IssuePriority:" for="issuePriority" />
+                    <p:selectOneListbox id="issuePriority" value="#{detailIssueBB.issue.issuePriority}">
+                        <f:selectItems value="#{detailIssueBB.allPriority}" var="issuesPriority" 
+                                       itemValue="#{issuesPriority}" itemLabel="#{issuesPriority}"/>
+                    </p:selectOneListbox>
+
+                    <p:outputLabel value="Data utworzenia zadania" for="creationDate" />
+                    <p:inputText id="creationDate" value="#{detailIssueBB.issue.creationDate}" title="CreationDate" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </p:inputText>
+                </p:panelGrid>
+
+
+                <p:commandButton action="#{detailIssueBB.saveAfterEdit()}" value="Zapisz zmiany" />
+                <p:tabView>
+
+                    <p:tab title="Komentarze" >
+                        <p:dataList value="#{detailIssueBB.allComments}" var="comment" >
+                            #{comment.commentText} #{comment.creationDate} 
+                        </p:dataList>
+
+                        <p:commandButton type="button" value="Komentarz" id="dialogCommentForm"/>
+
+                        <p:overlayPanel for="dialogCommentForm">
+                            <p:inputTextarea id="komentarz" value="#{detailIssueBB.comment.commentText}"/>
+                            <p:commandButton value="Dodaj" action="#{detailIssueBB.addCommentToEditIssue()}" />
+                        </p:overlayPanel>
+
+                    </p:tab>
+
+                    <p:tab title="Historia zdarzen dla zadania">
+                        <p:accordionPanel value="#{detailIssueBB.allEvent}" var="event">
+                            <p:tab title="#{event.message}">
+                                #{event.eventDate}
+                            </p:tab>
+                        </p:accordionPanel>
+                    </p:tab>
+                    <p:tab title="Historia statusow dla zadania">
+                        <p:accordionPanel value="#{detailIssueBB.allStatus}" var="status">
+                            <p:tab title="#{status.entryToThisStatus}">
+                                #{status.name} #{status.description}
+                            </p:tab>
+                        </p:accordionPanel>
+                    </p:tab>
+
+
+                    <p:tab title="Podzadania">
+
+                        <p:accordionPanel value="#{detailIssueBB.allSubIssues}" var="subissue">
+                            <p:tab title="#{subissue.name}">
+                                #{subissue.description}
+                            </p:tab>
+                        </p:accordionPanel>
+
+                        <p:commandButton type="button" value="Podzadanie" id="dialogSubIssueForm"/>
+
+                        <p:overlayPanel for="dialogSubIssueForm">
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="Name:" for="name" />
+                                <p:inputText id="name" value="#{createIssueBB.issue.name}" title="Name" />
+
+                                <p:outputLabel value="Description:" for="description" />
+                                <p:inputTextarea id="description" value="#{createIssueBB.issue.description}" />
+
+                                <p:outputLabel value="IssueType:" for="issueType" />
+                                <p:selectOneListbox id="issueType" value="#{createIssueBB.issue.issueType}">
+                                    <f:selectItems value="#{createIssueBB.allIssueType}" var="issuesType" 
+                                                   itemValue="#{issuesType}" itemLabel="#{issuesType}"/>
+                                </p:selectOneListbox>
+
+                                <p:outputLabel value="IssuePriority:" for="issuePriority" />
+                                <p:selectOneListbox id="issuePriority" value="#{createIssueBB.issue.issuePriority}">
+                                    <f:selectItems value="#{createIssueBB.allIssuePriority}" var="issuesPriority" 
+                                                   itemValue="#{issuesPriority}" itemLabel="#{issuesPriority}"/>
+
+                                </p:selectOneListbox>
+
+                                <p:commandButton value="#{msg['action.create']}" action="#{createIssueBB.createSubIssue()}" />
+                            </p:panelGrid>
+                        </p:overlayPanel>
+
+
+                    </p:tab>
+
+
+                </p:tabView>
+
+
+            </h:form>
+
+
+
+        </f:view>
+
+
+
+    </ui:define>
+
+</ui:composition>

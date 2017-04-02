@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../templates/basicTemplate.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="top">
+    </ui:define>
+
+    <ui:define name="left">
+       
+    </ui:define>
+
+    <ui:define name="content">
+        <h1>Lista zadań</h1>
+        <h:form id="form">  
+            
+            <p:dataTable id="issues" var="issue" value="#{issueListBB.issuesList}" paginator="true" rows="8" >  
+
+                <p:column filterBy="#{issue.name}" headerText="Nazwa" style="width:24%" filterMatchMode="startsWith">  
+                    <h:outputText value="#{issue.name}" />  
+                </p:column>  
+
+                <p:column headerText="Opis" style="width:24%">  
+                    <h:outputText value="#{issue.description}" />  
+                </p:column>  
+
+                <p:column headerText="Priorytet" style="width:24%" sortBy="#{issue.issuePriority}">  
+                    <h:outputText value="#{issue.issuePriority}" />  
+                </p:column> 
+                
+                <p:column headerText="Typ" style="width:24%" sortBy="#{issue.issueType}">  
+                    <h:outputText value="#{issue.issueType}" />  
+                </p:column> 
+                
+                <p:column headerText="Aktualny status" style="width:24%">  
+                    <h:outputText value="#{issue.issueStatus}" />  
+                </p:column> 
+
+                <p:column headerText="Edycja" style="width:4%">  
+                    <!--<p:commandButton id="selectButton" update=":form:display" oncomplete="carDialog.show()" icon="ui-icon-search" title="View">-->  
+                    <p:commandButton action="#{issueListBB.editIssue()}" value="Edytuj" >  
+                        <!--metoda setPropertzActonListener wiaze referencje selectedIssue z aktualnym issue << To wykorzystywane-->
+                        <f:setPropertyActionListener target="#{issueListBB.selectedIssue}" value="#{issue}" />
+                        <!--standardowa metoda przekazywania parametru wykorzystywana w artyrbucie actionListener-->
+                        <f:param name="issueID" value="#{issue.id}" />
+                    </p:commandButton>  
+                </p:column>  
+                
+            </p:dataTable> 
+        </h:form>
+    </ui:define>
+
+    <ui:define name="bottom">
+        Coffee CRM SystemS 
+    </ui:define>
+
+</ui:composition>

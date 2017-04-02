@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./../templates/basicTemplate.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="top">
+        
+    </ui:define>
+
+    <ui:define name="left">
+
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>  
+            <p:dataTable id="project" var="project" value="#{projectListBB.projects}" paginator="true" rows="8">  
+
+                <p:column filterBy="#{project.name}" headerText="#{msg['project.name']}" style="width:24%" filterMatchMode="startsWith">  
+                    <h:outputText value="#{project.name}" />  
+                </p:column>  
+
+                <p:column headerText="#{msg['project.desc']}" style="width:24%">  
+                    <h:outputText value="#{project.description}" />  
+                </p:column>  
+                <p:column headerText="Edycja" style="width:4%">  
+                    <!--<p:commandButton id="selectButton" update=":form:display" oncomplete="carDialog.show()" icon="ui-icon-search" title="View">-->  
+                    <p:commandButton action="#{projectListBB.editProject()}" value="#{msg['action.edit']}" >  
+                        <!--metoda setPropertzActonListener wiaze referencje selectedIssue z aktualnym issue << To wykorzystywane-->
+                        <f:setPropertyActionListener target="#{projectListBB.selectedProject}" value="#{project}" />
+                        <!--standardowa metoda przekazywania parametru wykorzystywana w artyrbucie actionListener-->
+                        <f:param name="projectID" value="#{project.id}" />
+                    </p:commandButton>  
+                </p:column>
+                
+            </p:dataTable> 
+        
+        </h:form>
+    </ui:define>
+
+    <ui:define name="bottom">
+    </ui:define>
+
+</ui:composition>

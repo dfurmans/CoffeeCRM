@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:outputLabel value="Nip" for="nip" />
+    <p:inputText id="nip" value="#{pageBean.konto.nip}" validatorMessage="#{msg['account.nip.validation']}">
+        <f:validateRegex pattern="^[0-9]{10}$" />
+    </p:inputText>
+   
+    <p:outputLabel value="Typ" for="clientType" />
+    <p:selectOneListbox id="clientType" value="#{pageBean.konto.accountBusinessEnumType}">
+
+        <f:selectItems value="#{createClientAccountBB.businessTypeClientAccount.entrySet()}" var="businessAccountType" 
+                       itemValue="#{businessAccountType.key}" itemLabel="#{businessAccountType.value}"/>
+    </p:selectOneListbox>
+
+</ui:composition>

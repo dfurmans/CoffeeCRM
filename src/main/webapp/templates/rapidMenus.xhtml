@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                >
+    <p:menubar>
+        <p:menuitem value="Panel głowny" url="./../main/index.xhtml" />
+        
+        <p:submenu label="Projekty">
+            <p:menuitem value="Wszystkie projekty" url="./../project/projectList.xhtml" />
+            <p:menuitem value="Nowy projekt" url="./../project/createProject.xhtml" />
+        </p:submenu>
+        
+        <p:submenu label="Zadania">
+            <p:menuitem value="Wszystkie zadania" url="./../issue/issueList.xhtml" />
+            <p:menuitem value="Zgłoś zadanie" url="./../issue/createIssue.xhtml" />
+        </p:submenu>
+        
+        <p:submenu label="Konta">
+            <p:menuitem value="Dodaj nowe konto Klienta" url="./../account/createAccountClient.xhtml" />
+            <p:menuitem value="Dodaj nowe konto Kierownika" url="./../account/createAccountManager.xhtml" />
+            <p:menuitem value="Dodaj nowe konto Pracownika" url="./../account/createAccountEmploye.xhtml" />
+        </p:submenu>
+        
+    </p:menubar>
+</ui:composition>

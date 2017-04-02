@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form>
+        <h:commandButton action="#{utilBean.closeSession()}" value="Zamknij bieżącą sesję HTTP (invalidate())" actionListener="#{messagesController.addFatal(actionEvent, 'Sesja', 'Zrestartowana')}"/> Identyfikator sesji: <h:outputText value="#{utilBean.sessionID}" /><br/>
+<!--            Sesja utworzna: ${utilBean.sessionCreatedTime}<br/>
+            Sesja czas ostatniego zadania HTTP: #{utilBean.lastAccessedIntervalTimeRequest}<br/>
+            Sesja - maksymalny czas zycia sesji HTTP: #{utilBean.maxLifeSessionTime}<br/>
+            Sprawdzam role CLIENT: #{utilBean.checkUserRole("CLIENT")}
+            Sprawdzam role MANAGER: #{utilBean.checkUserRole("MANAGER")}
+            Sprawdzam role EMPLOYE: #{utilBean.checkUserRole("EMPLOYE")}
+            Sprawdzam role ADMIN: #{utilBean.checkUserRole("ADMIN")}
+            <br/>Wartość parametru <code>"application.description"</code> to: <i>${utilBean.applicationDescriptionParam}</i>.-->
+        
+    </h:form>
+
+</ui:composition>

@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+    
+    <h:form id="menu">
+        <!--<f:subview id ="notClient" rendered="#{utilBean.checkUserRole('CLIENT')}">-->
+            <h3>Kontakty</h3>
+            <ul>
+                <li><h:outputLink value="./../account/createAccountClient.xhtml" >Create new Client</h:outputLink></li>
+                <li><h:outputLink value="./../account/createAccountManager.xhtml" >Create new Manager</h:outputLink></li>
+                <li><h:outputLink value="./../account/createAccountEmploye.xhtml" >Create new Employe</h:outputLink></li>
+                <li><h:outputLink value="./../account/createAccountAdmin.xhtml" >Create new Administrator</h:outputLink></li>
+            </ul>     
+        <!--</f:subview>-->
+        <h3>Zadania</h3>
+        <ul>
+            <li><h:outputLink value="./../issue/createIssue.xhtml" >New Issues</h:outputLink></li>
+            <li><h:outputLink value="./../issue/issueList.xhtml" >Issus List</h:outputLink></li>
+        </ul>
+        <h3>Projekty</h3>
+        <ul>
+            <li><h:outputLink value="./../project/projectList.xhtml" >Project List</h:outputLink></li>
+            <li><h:outputLink value="./../project/createProject.xhtml" >New Project</h:outputLink></li>
+        </ul>
+    </h:form>
+</ui:composition>

@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../templates/basicTemplate.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="top">
+    </ui:define>
+
+    <ui:define name="left">
+
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <p:fieldset legend="#{msg['issue.createNewIssue']}" toggleable="true">
+                <h:panelGrid columns="2">
+
+                    <p:outputLabel value="#{msg['issue.name']}" for="name" />
+                    <p:inputText id="name" value="#{createIssueBB.issue.name}" title="Name" />
+
+                    <p:outputLabel value="#{msg['issue.desc']}" for="description" />
+                    <p:inputTextarea id="description" value="#{createIssueBB.issue.description}" />
+
+                    <p:outputLabel value="#{msg['issue.type']}" for="issueType" />
+                    <p:selectOneListbox id="issueType" value="#{createIssueBB.issue.issueType}">
+
+                        <f:selectItems value="#{createIssueBB.issueType.entrySet()}" var="issuesType" 
+                                       itemValue="#{issuesType.key}" itemLabel="#{issuesType.value}"/>
+                    </p:selectOneListbox>
+
+                    <p:outputLabel value="#{msg['issue.priority']}" for="issuePriority" />
+                    <p:selectOneListbox id="issuePriority" value="#{createIssueBB.issue.issuePriority}">
+
+                        <f:selectItems value="#{createIssueBB.issuePriority.entrySet()}" var="issuePriority" 
+                                       itemValue="#{issuePriority.key}" itemLabel="#{issuePriority.value}"/>
+                    </p:selectOneListbox>
+
+                    <p:outputLabel value="#{msg['issue.assignToProject']}" for="issueToProject" />
+                    <p:autoComplete id ="issueToProject" forceSelection="true" dropdown="true" value="#{projectAutocomplete.selectedProject}" completeMethod="#{projectAutocomplete.complete}" 
+                                    var="project" 
+                                    itemLabel="#{project.name}"
+                                    itemValue="#{project}"
+                                    converter="#{projectConventer}"
+                                    />
+
+
+                    <p:outputLabel value="#{msg['issue.assignToAccount']}" for="issueToAccount" />
+                    <p:autoComplete id ="issueToAccount" forceSelection="true" dropdown="true" value="#{accountAutocomplete.selectedAccount}" completeMethod="#{accountAutocomplete.complete}" 
+                                    var="account"
+                                    itemLabel="#{account.name}"
+                                    itemValue="#{account}"
+                                    converter="#{accountConventer}"
+                                    />
+
+                    <!--
+                    <p:selectOneListbox id="issueToAccount" value="#{createIssueBB.selectedAccount}" converter="#{accountConventer}" >
+                    <f:selectItems value="#{accountListBB.accountList}" var="account"  
+                    itemValue="#{account}" itemLabel="#{account.login}"/>
+                    </p:selectOneListbox>
+                    -->
+                </h:panelGrid>
+            </p:fieldset>
+            <p:commandButton value="#{msg['action.create']}" action="#{createIssueBB.createIssue()}" />
+        </h:form>
+    </ui:define>
+
+</ui:composition>
